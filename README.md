@@ -5,6 +5,26 @@ can be split into two categories:
  1) Type validity checking
  2) Type conversion
 
+# Getting Started
+To get started,  simply run: `npm i binary-utility-functions` at the root of the
+project.
+
+From here, import the code into the file.
+
+```
+const { validate, convert_types } = require('binary-utility-functions').default;
+
+function check_valid() {
+    console.log(validate.is_valid_u8(0xFF));
+}
+
+function convert() {
+    let u8 = 0xAF;
+    let nibbles = convert_types.u8x1_nx2(u8);
+    console.log(u8, nibbles);
+}
+```
+
 #### Types catered for
 This library validates and converts between these types:
 ```
@@ -43,7 +63,7 @@ export function two_u16_to_one_u32(low: number, high: number): number {
 ```
 
 
-#### Usage
+#### Naming conventions
 The exported module is an object that looks like this:
 ```
 {
