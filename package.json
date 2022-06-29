@@ -5,7 +5,7 @@
   },
   "name": "binary-utility-functions",
   "description": "This library provides a handy set of utility functions for manipulating binary values- such as those ascertained from a Buffer, or a TCP stream. These functions can be split into two categories:  1) Type validity checking  2) Type conversion",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "directories": {
     "test": "tests"
