@@ -1,1 +1,0 @@
-function n(r){return!!(Number.isInteger(r)&&r<=15&&r>=0)}function e(r){return!!(Number.isInteger(r)&&r<=255&&r>=0)}function i(r){return!!(Number.isInteger(r)&&r<=65535&&r>=0)}function u(r){return!!(Number.isInteger(r)&&r<=4294967295&&r>=0)}export{n as a,e as b,i as c,u as d};
