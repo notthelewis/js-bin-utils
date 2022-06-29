@@ -15,7 +15,7 @@ import {
     three_u8_to_u32,
 } from './converters';
 
-module.exports = {
+export default {
     validate: {
         nibble: is_valid_nibble,
         u8: is_valid_u8,
