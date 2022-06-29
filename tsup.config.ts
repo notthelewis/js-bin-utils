@@ -2,10 +2,8 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
     clean: true,
-    entry: ['src/**/*.ts'],
+    entry: ['src/index.ts'],
     format: ['esm', 'cjs'],
-    minify: true,
     env: { 'NODE_ENV': 'production' },
-    skipNodeModulesBundle: true
-    // tsconfig: './tsconfig.json'
-})
+    dts: true
+});
