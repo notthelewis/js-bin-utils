@@ -16,15 +16,30 @@ From here, import the code into a file. Both ESM and CJS imports are supported.
 ```js
 const { validate, convert } = require('binary-utility-functions');
 
-let u8 = 0xAF;
+const nibble = 0xF;
+const u8 = 0xAA;
+const u16 = 0xBEEF;
+const u32 = 0xDEADBEEF;
 
-// Check if: 0xAF is a valid u8
-console.log(validate.is_valid_u8(u8));
+validate.nibble(nibble);             // true
+validate.u8(u8);                     // true
+validate.u16(u16);                   // true
+validate.u32(u32);                   // true
 
-// Convert u8 to two nibbles
-let nibbles = convert.u8x1_nx2(u8);
+validate.nibble(u8);                 // false
+validate.u8(u16);                    // false
+validate.u16(u32);                   // false
 
-console.log(u8, nibbles);
+convert.nx2_u8x1(0xA, 0xB);           // 0xAB
+convert.u8x1_nx2(0xAB);               // [0xB, 0xA]
+
+convert.u8x2_u16x1(0xAA, 0xBB);       // 0xBBAA
+convert.u8x3_u32x1(0xAA, 0xBB, 0xCC); // 0xCCBBAA
+
+convert.u16x1_u8x2(0xAABB);           // [0xBB, 0xAA]
+convert.u16x2_u32x1(0xBEEF, 0xDEAD);  // 0xDEADBEEF
+
+convert.u32x1_u16x2(0xDEADBEEF);      // 0xBEEFDEAD
 ```
 
 
@@ -93,7 +108,6 @@ conventions:
 
 >> If concatenating multiple smaller data types into one larger data type, the
 >> parameters are always passed in LSB order.
-
 
 ```js
 const { convert } = require('binary-utility-functions');
