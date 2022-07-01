@@ -31,15 +31,15 @@ validate.u8(u16);                    // false
 validate.u16(u32);                   // false
 
 convert.nx2_u8x1(0xA, 0xB);           // 0xAB
-convert.u8x1_nx2(0xAB);               // [0xB, 0xA]
+convert.u8x1_nx2(0xAB);               // [0xA, 0xB]
 
-convert.u8x2_u16x1(0xAA, 0xBB);       // 0xBBAA
-convert.u8x3_u32x1(0xAA, 0xBB, 0xCC); // 0xCCBBAA
+convert.u8x2_u16x1(0xAA, 0xBB);       // 0xAABB
+convert.u8x3_u32x1(0xAA, 0xBB, 0xCC); // 0xAABBCC
 
-convert.u16x1_u8x2(0xAABB);           // [0xBB, 0xAA]
-convert.u16x2_u32x1(0xBEEF, 0xDEAD);  // 0xDEADBEEF
+convert.u16x1_u8x2(0xAABB);           // [0xAA, 0xBB]
+convert.u16x2_u32x1(0xDEAD, 0xBEEF);  // 0xDEADBEEF
 
-convert.u32x1_u16x2(0xDEADBEEF);      // 0xBEEFDEAD
+convert.u32x1_u16x2(0xDEADBEEF);      // [0xDEAD, 0xBEEF]
 ```
 
 
@@ -98,28 +98,3 @@ u32 (unsigned, 32 bit integer)
 Please note that, since JS only has one number type, each 'type' will still be
 stored inside a number- but they'll have to first pass verification steps.
 
-#### Conversion methodology
-Each conversion function will take in 1 or more parameters (a number), then
-returns one or more different types. Every conversion function follows the same
-conventions:
-
-> If chopping a data type into multiple, smaller data types; the return parameters
-> will always be an array, sorted MSB first.
-
->> If concatenating multiple smaller data types into one larger data type, the
->> parameters are always passed in LSB order.
-
-```js
-const { convert } = require('binary-utility-functions');
-
-let original_value = 0xDEADBEEF;
-
-let [ left, right ] = convert.u32x1_u16x2(original_value);
-console.log({left, right});
-// Left =  0xBEEF
-// Right = 0xDEAD
-
-let combined = convert.u16x2_u32x1(right, left);
-console.log({combined});
-// 0xDEADBEEF
-```

@@ -1,8 +1,10 @@
+.gitignore
 coverage
-src
 jest.config.ts
+node_modules
+package-lock.json
+src
 tests
 tsup.config.ts
 tsconfig.json
 *.md
-.gitignore
