@@ -58,14 +58,32 @@ class DataType {
 }
 
 export function nibble_bit_set(value: number, position: number): boolean {
+    if (!value || !position) {
+        throw new Error("util::DataType::nibble_bit_set::InvalidParameters");
+    }
+
     return new DataType('nibble').is_bit_set(value, position);
 }
+
 export function u8_bit_set(value: number, position: number): boolean {
-   return new DataType('u8').is_bit_set(value, position);
+    if (!value || !position) {
+        throw new Error("util::DataType::u8_bit_set::InvalidParameters");
+    }
+
+    return new DataType('u8').is_bit_set(value, position);
 }
+
 export function u16_bit_set(value: number, position: number): boolean {
+    if (!value || !position) {
+        throw new Error("util::DataType::u16_bit_set::InvalidParameters");
+    }
+
     return new DataType('u16').is_bit_set(value, position);
 }
 export function u32_bit_set(value: number, position: number): boolean {
+    if (!value || !position) {
+        throw new Error("util::DataType::u32_bit_set::InvalidParameters");
+    }
+
     return new DataType('u32').is_bit_set(value, position);
 }
