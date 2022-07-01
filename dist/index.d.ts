@@ -1,4 +1,49 @@
 /**
+  * This function converts a valid, 32-bit unsigned integer into two 16-bit
+  * signed integers.
+  * @example Converting one u32 into two u16 values
+  * ```
+  * const u32 = 0xDEADBEEF;
+  * const [ left, right ] = convert.u32x1_u16x2(u32);
+  * console.log(left.toString(16), right.toString(16));
+  * // [ 0xDEAD, 0xBEEF ]
+  * ```
+  * @param u32 - The 32-bit unsigned integer to convert
+  * @returns An array of two u16s. The left half at index 0, the right at 1
+**/
+declare function one_u32_to_two_u16(u32: number): [number, number];
+/**
+  * This function takes one valid u32, then converts it into 4 u8s.
+  * @example
+  * ```js
+  * const u32 = 0xDEADBEEF;
+  * const u8s = convert.u32x1_u8x4(u32);
+  * u8s.forEach(u8 => {
+  *     console.log(u8.toString(16));
+  * });
+  * // 0xDE, 0xAD, 0xBE, 0xEF
+  * ```
+  * @param u32 - A valid u32
+  * @returns An array of 4 bytes, in the order they were entered.
+**/
+declare function one_u32_to_four_u8(u32: number): [number, number, number, number];
+
+/**
+  * This function takes in a single u16 and splits it into two array elements.
+  * The returned array contains two bytes, index 0 is the left-most half of
+  * the input value, index 1 is the right-most half.
+  * @example Converting one valid u16 into two bytes
+  * ```js
+  * const u16 = 0xAABB;
+  * const [ left, right ] = convert.u16x1_u8x2(0xAABB);
+  * console.log(u8_left.toString(16), u8_right.toString(16));
+  * // 0xAA, 0xBB
+  * ```
+  * @param u16 - The byte that should be split
+  * @returns Index 0 = left half, index 1 = right half
+**/
+declare function one_u16_to_two_u8(u16: number): [number, number];
+/**
   * This function converts two, valid 16-bit unsigned integers into one unsigned
   * 32-bit integer.
   * @example Converting two u16 values into one u32
@@ -15,20 +60,6 @@
   * @returns A valid u32 value, which is the product of the left & right params.
 **/
 declare function two_u16_to_one_u32(left_u16: number, right_u16: number): number;
-/**
-  * This function converts a valid, 32-bit unsigned integer into two 16-bit
-  * signed integers.
-  * @example Converting one u32 into two u16 values
-  * ```
-  * const u32 = 0xDEADBEEF;
-  * const [ left, right ] = convert.u32x1_u16x2(u32);
-  * console.log(left.toString(16), right.toString(16));
-  * // [ 0xDEAD, 0xBEEF ]
-  * ```
-  * @param u32 - The 32-bit unsigned integer to convert
-  * @returns An array of two u16s. The left half at index 0, the right at 1
-**/
-declare function one_u32_to_two_u16(u32: number): [number, number];
 
 /**
   * This function takes two numbers, checks whether they're valid u8s, then
@@ -65,20 +96,23 @@ declare function two_u8_to_one_u16(byte_left: number, byte_right: number): numbe
 **/
 declare function three_u8_to_one_u32(byte_left: number, byte_mid: number, byte_right: number): number;
 /**
-  * This function takes in a single u16 and splits it into two array elements.
-  * The returned array contains two bytes, index 0 is the left-most half of
-  * the input value, index 1 is the right-most half.
-  * @example Converting one valid u16 into two bytes
+  * This function converts 4 unsigned, 8-bit integer into one unsigned 32-bit
+  * integer.
+  * @example Combining four bytes to make a u32
   * ```js
-  * const u16 = 0xAABB;
-  * const [ left, right ] = convert.u16x1_u8x2(0xAABB);
-  * console.log(u8_left.toString(16), u8_right.toString(16));
-  * // 0xAA, 0xBB
+  * const a = 0xDE;
+  * const b = 0xAD;
+  * const c = 0xBE;
+  * const d = 0xEF:
+  *
+  * const abcd = convert.u8x4_u32x1(a,b,c,d);
+  * console.log(abcd.toString(16));
+  * // 0xDEADBEEF
+  *
   * ```
-  * @param u16 - The byte that should be split
-  * @returns Index 0 = left half, index 1 = right half
+  *
 **/
-declare function one_u16_to_two_u8(u16: number): [number, number];
+declare function four_u8_to_one_u32(byte_left: number, byte_mid_left: number, byte_mid_right: number, byte_right: number): number;
 
 /**
   * This function takes two numbers, checks whether they're valid nibbles, then
@@ -186,9 +220,11 @@ declare const convert: {
     u8x1_nx2: typeof one_u8_to_two_nibbles;
     u8x2_u16x1: typeof two_u8_to_one_u16;
     u8x3_u32x1: typeof three_u8_to_one_u32;
+    u8x4_u32x1: typeof four_u8_to_one_u32;
     u16x1_u8x2: typeof one_u16_to_two_u8;
     u16x2_u32x1: typeof two_u16_to_one_u32;
     u32x1_u16x2: typeof one_u32_to_two_u16;
+    u32x1_u8x4: typeof one_u32_to_four_u8;
 };
 
 export { convert, validate };

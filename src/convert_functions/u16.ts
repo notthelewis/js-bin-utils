@@ -1,6 +1,30 @@
 import { is_valid_u16, is_valid_u32 } from "../validators";
 
 /**
+  * This function takes in a single u16 and splits it into two array elements.
+  * The returned array contains two bytes, index 0 is the left-most half of
+  * the input value, index 1 is the right-most half.
+  * @example Converting one valid u16 into two bytes
+  * ```js
+  * const u16 = 0xAABB;
+  * const [ left, right ] = convert.u16x1_u8x2(0xAABB);
+  * console.log(u8_left.toString(16), u8_right.toString(16));
+  * // 0xAA, 0xBB
+  * ```
+  * @param u16 - The byte that should be split
+  * @returns Index 0 = left half, index 1 = right half
+**/
+export function one_u16_to_two_u8(u16: number): [number, number] {
+    if (! is_valid_u16(u16)) {
+        throw new Error("util::one_u16_to_two_u8::is_valid_u16::false");
+    }
+
+    return [u16 >> 8, u16 & 0xFF];
+}
+
+
+
+/**
   * This function converts two, valid 16-bit unsigned integers into one unsigned
   * 32-bit integer.
   * @example Converting two u16 values into one u32
@@ -27,23 +51,3 @@ export function two_u16_to_one_u32(left_u16: number, right_u16: number): number 
 
 
 
-/**
-  * This function converts a valid, 32-bit unsigned integer into two 16-bit
-  * signed integers.
-  * @example Converting one u32 into two u16 values
-  * ```
-  * const u32 = 0xDEADBEEF;
-  * const [ left, right ] = convert.u32x1_u16x2(u32);
-  * console.log(left.toString(16), right.toString(16));
-  * // [ 0xDEAD, 0xBEEF ]
-  * ```
-  * @param u32 - The 32-bit unsigned integer to convert
-  * @returns An array of two u16s. The left half at index 0, the right at 1
-**/
-export function one_u32_to_two_u16(u32: number): [number, number] {
-    if (! is_valid_u32(u32)) {
-        throw new Error("util::one_u32_to_two_u16::is_valid_u32::false");
-    }
-
-    return [u32 >>> 16, u32 & 0xFFFF];
-}

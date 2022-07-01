@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>49/49</span>
+                <span class='fraction'>50/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>49/49</span>
+                <span class='fraction'>50/50</span>
             </div>
         
             
@@ -112,7 +112,35 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -138,30 +166,34 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { is_valid_u16, is_valid_u32 } from "../validators";
+&nbsp;
+/**
+  * This function takes in a single u16 and splits it into two array elements.
+  * The returned array contains two bytes, index 0 is the left-most half of
+  * the input value, index 1 is the right-most half.
+  * @example Converting one valid u16 into two bytes
+  * ```js
+  * const u16 = 0xAABB;
+  * const [ left, right ] = convert.u16x1_u8x2(0xAABB);
+  * console.log(u8_left.toString(16), u8_right.toString(16));
+  * // 0xAA, 0xBB
+  * ```
+  * @param u16 - The byte that should be split
+  * @returns Index 0 = left half, index 1 = right half
+**/
+export function one_u16_to_two_u8(u16: number): [number, number] {
+    if (! is_valid_u16(u16)) {
+        throw new Error("util::one_u16_to_two_u8::is_valid_u16::false");
+    }
+&nbsp;
+    return [u16 &gt;&gt; 8, u16 &amp; 0xFF];
+}
+&nbsp;
+&nbsp;
 &nbsp;
 /**
   * This function converts two, valid 16-bit unsigned integers into one unsigned
@@ -190,26 +222,6 @@ export function two_u16_to_one_u32(left_u16: number, right_u16: number): number 
 &nbsp;
 &nbsp;
 &nbsp;
-/**
-  * This function converts a valid, 32-bit unsigned integer into two 16-bit
-  * signed integers.
-  * @example Converting one u32 into two u16 values
-  * ```
-  * const u32 = 0xDEADBEEF;
-  * const [ left, right ] = convert.u32x1_u16x2(u32);
-  * console.log(left.toString(16), right.toString(16));
-  * // [ 0xDEAD, 0xBEEF ]
-  * ```
-  * @param u32 - The 32-bit unsigned integer to convert
-  * @returns An array of two u16s. The left half at index 0, the right at 1
-**/
-export function one_u32_to_two_u16(u32: number): [number, number] {
-    if (! is_valid_u32(u32)) {
-        throw new Error("util::one_u32_to_two_u16::is_valid_u32::false");
-    }
-&nbsp;
-    return [u32 &gt;&gt;&gt; 16, u32 &amp; 0xFFFF];
-}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -217,7 +229,7 @@ export function one_u32_to_two_u16(u32: number): [number, number] {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Jul 01 2022 02:16:22 GMT+0100 (British Summer Time)
+                at Fri Jul 01 2022 13:50:03 GMT+0100 (British Summer Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -153,6 +153,10 @@ export default {
   // Adds a location field to test results
   // testLocationInResults: false,
 
+  testMatch: [
+    "**/tests/**/*.ts",
+    "**/tests/**/**/*.ts"
+  ],
   // The glob patterns Jest uses to detect test files
   // testMatch: [
   //   "**/__tests__/**/*.[jt]s?(x)",
