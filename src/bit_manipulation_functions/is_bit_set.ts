@@ -43,6 +43,10 @@ class DataType {
     }
 
     validate(value: number, position: number): boolean {
+        if (isNaN(position) || typeof position != "number") {
+            throw new Error(`util::DataType::${this.type_name}_bit_set::validate::InvalidParameter`);
+        }
+
         if (! this.valid_handler(value)) return false;
         if (position < this.lower_bound || position > this.higher_bound) return false;
         return true;
@@ -58,7 +62,7 @@ class DataType {
 }
 
 export function nibble_bit_set(value: number, position: number): boolean {
-    if (!value || !position) {
+    if (typeof value == undefined || typeof position == undefined) {
         throw new Error("util::DataType::nibble_bit_set::InvalidParameters");
     }
 
@@ -66,7 +70,7 @@ export function nibble_bit_set(value: number, position: number): boolean {
 }
 
 export function u8_bit_set(value: number, position: number): boolean {
-    if (!value || !position) {
+    if (typeof value == undefined || typeof position == undefined) {
         throw new Error("util::DataType::u8_bit_set::InvalidParameters");
     }
 
@@ -74,14 +78,15 @@ export function u8_bit_set(value: number, position: number): boolean {
 }
 
 export function u16_bit_set(value: number, position: number): boolean {
-    if (!value || !position) {
+    if (typeof value == undefined || typeof position == undefined) {
         throw new Error("util::DataType::u16_bit_set::InvalidParameters");
     }
 
     return new DataType('u16').is_bit_set(value, position);
 }
+
 export function u32_bit_set(value: number, position: number): boolean {
-    if (!value || !position) {
+    if (typeof value == undefined || typeof position == undefined) {
         throw new Error("util::DataType::u32_bit_set::InvalidParameters");
     }
 
