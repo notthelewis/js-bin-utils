@@ -1,3 +1,8 @@
+declare function nibble_bit_set(value: number, position: number): boolean;
+declare function u8_bit_set(value: number, position: number): boolean;
+declare function u16_bit_set(value: number, position: number): boolean;
+declare function u32_bit_set(value: number, position: number): boolean;
+
 /**
   * This function converts a valid, 32-bit unsigned integer into two 16-bit
   * signed integers.
@@ -226,5 +231,13 @@ declare const convert: {
     u32x1_u16x2: typeof one_u32_to_two_u16;
     u32x1_u8x4: typeof one_u32_to_four_u8;
 };
+declare const bits: {
+    bit_set: {
+        nibble: typeof nibble_bit_set;
+        u8: typeof u8_bit_set;
+        u16: typeof u16_bit_set;
+        u32: typeof u32_bit_set;
+    };
+};
 
-export { convert, validate };
+export { bits, convert, validate };

@@ -20,6 +20,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
+  bits: () => bits,
   convert: () => convert,
   validate: () => validate
 });
@@ -131,6 +132,71 @@ var convert_functions_default = {
   u32x1_u8x4: one_u32_to_four_u8
 };
 
+// src/bit_manipulation_functions/is_bit_set.ts
+var DataType = class {
+  constructor(type_name) {
+    this.lower_bound = 0;
+    this.higher_bound = 7;
+    this.valid_handler = (val) => false;
+    switch (type_name) {
+      case "nibble":
+        this.higher_bound = 3;
+        this.valid_handler = is_valid_nibble;
+        break;
+      case "u8":
+        this.higher_bound = 7;
+        this.valid_handler = is_valid_u8;
+        break;
+      case "u16":
+        this.higher_bound = 15;
+        this.valid_handler = is_valid_u16;
+        break;
+      case "u32":
+        this.higher_bound = 31;
+        this.valid_handler = is_valid_u32;
+        break;
+      default:
+        throw new Error(`util::DataType::Type::${type_name} Unrecognized`);
+    }
+    this.type_name = type_name;
+  }
+  validate(value, position) {
+    if (!this.valid_handler(value))
+      return false;
+    if (position < this.lower_bound || position > this.higher_bound)
+      return false;
+    return true;
+  }
+  is_bit_set(value, position) {
+    if (!this.validate(value, position)) {
+      throw new Error(`util::DataType::${this.type_name}_bit_set::ParamOutOfBounds`);
+    }
+    return (value >> position & 1) != 0;
+  }
+};
+function nibble_bit_set(value, position) {
+  return new DataType("nibble").is_bit_set(value, position);
+}
+function u8_bit_set(value, position) {
+  return new DataType("u8").is_bit_set(value, position);
+}
+function u16_bit_set(value, position) {
+  return new DataType("u16").is_bit_set(value, position);
+}
+function u32_bit_set(value, position) {
+  return new DataType("u32").is_bit_set(value, position);
+}
+
+// src/bit_manipulation_functions/index.ts
+var bit_manipulation_functions_default = {
+  bit_set: {
+    nibble: nibble_bit_set,
+    u8: u8_bit_set,
+    u16: u16_bit_set,
+    u32: u32_bit_set
+  }
+};
+
 // src/index.ts
 var validate = {
   nibble: is_valid_nibble,
@@ -139,8 +205,10 @@ var validate = {
   u32: is_valid_u32
 };
 var convert = { ...convert_functions_default };
+var bits = { ...bit_manipulation_functions_default };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  bits,
   convert,
   validate
 });
