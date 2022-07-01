@@ -26,74 +26,89 @@ __export(src_exports, {
 module.exports = __toCommonJS(src_exports);
 
 // src/validators.ts
-function is_valid_nibble(byte_value) {
-  if (Number.isInteger(byte_value) && byte_value <= 15 && byte_value >= 0) {
+function is_valid_nibble(value) {
+  if (Number.isInteger(value) && value <= 15 && value >= 0) {
     return true;
   }
   return false;
 }
-function is_valid_u8(byte_value) {
-  if (Number.isInteger(byte_value) && byte_value <= 255 && byte_value >= 0) {
+function is_valid_u8(value) {
+  if (Number.isInteger(value) && value <= 255 && value >= 0) {
     return true;
   }
   return false;
 }
-function is_valid_u16(byte_value) {
-  if (Number.isInteger(byte_value) && byte_value <= 65535 && byte_value >= 0) {
+function is_valid_u16(value) {
+  if (Number.isInteger(value) && value <= 65535 && value >= 0) {
     return true;
   }
   return false;
 }
-function is_valid_u32(byte_value) {
-  if (Number.isInteger(byte_value) && byte_value <= 4294967295 && byte_value >= 0) {
+function is_valid_u32(value) {
+  if (Number.isInteger(value) && value <= 4294967295 && value >= 0) {
     return true;
   }
   return false;
 }
 
-// src/converters.ts
-function two_nibble_to_one_u8(nibble_low, nibble_high) {
-  if (!is_valid_nibble(nibble_low) || !is_valid_nibble(nibble_high)) {
+// src/convert_functions/nibble.ts
+function two_nibble_to_one_u8(nibble_left, nibble_right) {
+  if (!is_valid_nibble(nibble_left) || !is_valid_nibble(nibble_right)) {
     throw new Error("util::two_nibble_to_one_byte::is_valid_nibble::false");
   }
-  return nibble_low << 4 | nibble_high;
+  return nibble_left << 4 | nibble_right;
 }
 function one_u8_to_two_nibbles(u8) {
   if (!is_valid_u8(u8)) {
     throw new Error("util::one_u8_to_two_nibbles::is_valid_u8::false");
   }
-  return [u8 & 15, u8 >> 4];
+  return [u8 >> 4, u8 & 15];
 }
-function two_u8_to_one_u16(byte_low, byte_high) {
-  if (!is_valid_u8(byte_low) || !is_valid_u8(byte_high)) {
+
+// src/convert_functions/u8.ts
+function two_u8_to_one_u16(byte_left, byte_right) {
+  if (!is_valid_u8(byte_left) || !is_valid_u8(byte_right)) {
     throw new Error(`util::two_u8_to_one_u16::is_valid_u8::false`);
   }
-  return byte_high << 8 | byte_low;
+  return byte_left << 8 | byte_right;
+}
+function three_u8_to_one_u32(byte_left, byte_mid, byte_right) {
+  if (!is_valid_u8(byte_left) || !is_valid_u8(byte_mid) || !is_valid_u8(byte_right)) {
+    throw new Error("util::three_u8_to_u32::is_valid_u8::false");
+  }
+  return byte_left << 16 | byte_mid << 8 | byte_right;
 }
 function one_u16_to_two_u8(u16) {
   if (!is_valid_u16(u16)) {
     throw new Error("util::one_u16_to_two_u8::is_valid_u16::false");
   }
-  return [u16 & 255, u16 >> 8];
+  return [u16 >> 8, u16 & 255];
 }
-function two_u16_to_one_u32(low, high) {
-  if (!is_valid_u16(low) || !is_valid_u16(high)) {
+
+// src/convert_functions/u16.ts
+function two_u16_to_one_u32(left_u16, right_u16) {
+  if (!is_valid_u16(left_u16) || !is_valid_u16(right_u16)) {
     throw new Error("util::two_u16_to_one_u32::is_valid_u16::false");
   }
-  return (high << 16 >>> 0 | low) >>> 0;
+  return (left_u16 << 16 | right_u16) >>> 0;
 }
 function one_u32_to_two_u16(u32) {
   if (!is_valid_u32(u32)) {
     throw new Error("util::one_u32_to_two_u16::is_valid_u32::false");
   }
-  return [u32 & 65535, u32 >>> 16];
+  return [u32 >>> 16, u32 & 65535];
 }
-function three_u8_to_u32(byte_low, byte_mid, byte_high) {
-  if (!is_valid_u8(byte_low) || !is_valid_u8(byte_mid) || !is_valid_u8(byte_high)) {
-    throw new Error("util::three_u8_to_u32::is_valid_u8::false");
-  }
-  return byte_high << 16 | (byte_mid << 8 | byte_low);
-}
+
+// src/convert_functions/index.ts
+var convert_functions_default = {
+  nx2_u8x1: two_nibble_to_one_u8,
+  u8x1_nx2: one_u8_to_two_nibbles,
+  u8x2_u16x1: two_u8_to_one_u16,
+  u8x3_u32x1: three_u8_to_one_u32,
+  u16x1_u8x2: one_u16_to_two_u8,
+  u16x2_u32x1: two_u16_to_one_u32,
+  u32x1_u16x2: one_u32_to_two_u16
+};
 
 // src/index.ts
 var validate = {
@@ -102,15 +117,7 @@ var validate = {
   u16: is_valid_u16,
   u32: is_valid_u32
 };
-var convert = {
-  nx2_u8x1: two_nibble_to_one_u8,
-  u8x1_nx2: one_u8_to_two_nibbles,
-  u8x2_u16x1: two_u8_to_one_u16,
-  u8x3_u32x1: three_u8_to_u32,
-  u16x1_u8x2: one_u16_to_two_u8,
-  u16x2_u32x1: two_u16_to_one_u32,
-  u32x1_u16x2: one_u32_to_two_u16
-};
+var convert = { ...convert_functions_default };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   convert,
