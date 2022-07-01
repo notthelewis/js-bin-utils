@@ -6,7 +6,7 @@ import {
 } from './is_bit_set';
 
 export default {
-    bit_set: {
+    is_bit_set: {
         nibble: nibble_bit_set,
         u8: u8_bit_set,
         u16: u16_bit_set,
