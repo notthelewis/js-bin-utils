@@ -99,6 +99,19 @@ function one_u32_to_two_u16(u32) {
   return [u32 >>> 16, u32 & 65535];
 }
 
+// src/convert_functions/u32.ts
+function one_u32_to_four_u8(u32) {
+  if (!is_valid_u32(u32)) {
+    throw new Error("util::one_u32_to_three_u8::is_valid_u32::false");
+  }
+  return [
+    u32 >>> 24,
+    u32 >>> 16 & 255,
+    u32 >>> 8 & 255,
+    u32 & 255
+  ];
+}
+
 // src/convert_functions/index.ts
 var convert_functions_default = {
   nx2_u8x1: two_nibble_to_one_u8,
@@ -107,7 +120,8 @@ var convert_functions_default = {
   u8x3_u32x1: three_u8_to_one_u32,
   u16x1_u8x2: one_u16_to_two_u8,
   u16x2_u32x1: two_u16_to_one_u32,
-  u32x1_u16x2: one_u32_to_two_u16
+  u32x1_u16x2: one_u32_to_two_u16,
+  u32x1_u8x4: one_u32_to_four_u8
 };
 
 // src/index.ts

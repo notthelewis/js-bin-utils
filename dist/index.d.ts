@@ -1,4 +1,20 @@
 /**
+  * This function takes one valid u32, then converts it into 4 u8s.
+  * @example
+  * ```js
+  * const u32 = 0xDEADBEEF;
+  * const u8s = convert.u32x1_u8x4(u32);
+  * u8s.forEach(u8 => {
+  *     console.log(u8.toString(16));
+  * });
+  * // 0xDE, 0xAD, 0xBE, 0xEF
+  * ```
+  * @param u32 - A valid u32
+  * @returns An array of 4 bytes, in the order they were entered.
+**/
+declare function one_u32_to_four_u8(u32: number): [number, number, number, number];
+
+/**
   * This function converts two, valid 16-bit unsigned integers into one unsigned
   * 32-bit integer.
   * @example Converting two u16 values into one u32
@@ -189,6 +205,7 @@ declare const convert: {
     u16x1_u8x2: typeof one_u16_to_two_u8;
     u16x2_u32x1: typeof two_u16_to_one_u32;
     u32x1_u16x2: typeof one_u32_to_two_u16;
+    u32x1_u8x4: typeof one_u32_to_four_u8;
 };
 
 export { convert, validate };
