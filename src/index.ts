@@ -17,4 +17,4 @@ export const validate = {
 
 export const convert = { ...convert_fns.default };
 
-export const bits = { ...bit_fns.default }
+export const bits = { ...bit_fns.default };
