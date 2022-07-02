@@ -1,6 +1,62 @@
+/**
+  * This function checks whether a bit at a given position in a nibble is set.
+  * @example Checking whether bits are set for value: 2
+  * ```
+  * const value = 0B0010;
+  * console.log(bits.is_bit_set(1)); // true
+  * console.log(bits.is_bit_set(0)); // false
+  * console.log(bits.is_bit_set(4)); // Error, out of bounds
+  *
+  * ```
+  * @param value - A valid nibble, between 0 and 15.
+  * @param position - The position of the bit to check, from zero to 3
+  * @returns boolean
+**/
 declare function nibble_bit_set(value: number, position: number): boolean;
+/**
+  * This function checks whether a bit at a given position in a u8 is set.
+  * @example Checking whether bits are set in value: 0B10010001
+  * ```
+  * const value = 0B10010001;
+  * console.log(bits.is_bit_set(7)); // true
+  * console.log(bits.is_bit_set(1)); // false
+  * console.log(bits.is_bit_set(8)); // Error, out of bounds
+  *
+  * ```
+  * @param value - A valid u8, between 0 and 255.
+  * @param position - The position of the bit to check, from zero to 7
+  * @returns boolean
+**/
 declare function u8_bit_set(value: number, position: number): boolean;
+/**
+  * This function checks whether a bit at a given position in a u16 is set.
+  * @example Checking whether bits are set for value: 0b1000100010001000
+  * ```
+  * const value = 0b1000100010001000;
+  * console.log(bits.is_bit_set(15)); // true
+  * console.log(bits.is_bit_set(2);   // false
+  * console.log(bits.is_bit_set(16)); // Error, out of bounds
+  *
+  * ```
+  * @param value - A valid u16 between 0 and 0xFFFF.
+  * @param position - The position of the bit to check, from zero to 15
+  * @returns boolean
+**/
 declare function u16_bit_set(value: number, position: number): boolean;
+/**
+  * This function checks whether a bit at a given position in a u32 is set.
+  * @example Checking whether bits are set for value: 0b1000100010001000
+  * ```
+  * const value = 0b10001000100010001000100010001000;
+  * console.log(bits.is_bit_set(31)); // true
+  * console.log(bits.is_bit_set(2)); // false
+  * console.log(bits.is_bit_set(32)); // Error, out of bounds
+  *
+  * ```
+  * @param value - A valid u32
+  * @param position - The position of the bit to check, from zero to 31
+  * @returns boolean
+**/
 declare function u32_bit_set(value: number, position: number): boolean;
 
 /**
@@ -232,7 +288,7 @@ declare const convert: {
     u32x1_u8x4: typeof one_u32_to_four_u8;
 };
 declare const bits: {
-    bit_set: {
+    is_bit_set: {
         nibble: typeof nibble_bit_set;
         u8: typeof u8_bit_set;
         u16: typeof u16_bit_set;

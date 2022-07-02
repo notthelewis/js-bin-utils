@@ -1,5 +1,3 @@
-"use strict";
-
 // src/validators.ts
 function is_valid_nibble(value) {
   if (Number.isInteger(value) && value <= 15 && value >= 0) {
@@ -135,6 +133,11 @@ var DataType = class {
     this.type_name = type_name;
   }
   validate(value, position) {
+    for (const param of arguments) {
+      if (isNaN(param) || typeof param != "number") {
+        throw new Error(`util::DataType::${this.type_name}_bit_set::validate::InvalidParameter`);
+      }
+    }
     if (!this.valid_handler(value))
       return false;
     if (position < this.lower_bound || position > this.higher_bound)
@@ -149,33 +152,41 @@ var DataType = class {
   }
 };
 function nibble_bit_set(value, position) {
-  if (!value || !position) {
-    throw new Error("util::DataType::nibble_bit_set::InvalidParameters");
+  for (const param of arguments) {
+    if (isNaN(param) || typeof param != "number") {
+      throw new Error("util::DataType::nibble_bit_set::InvalidParameters");
+    }
   }
   return new DataType("nibble").is_bit_set(value, position);
 }
 function u8_bit_set(value, position) {
-  if (!value || !position) {
-    throw new Error("util::DataType::u8_bit_set::InvalidParameters");
+  for (const param of arguments) {
+    if (isNaN(param) || typeof param != "number") {
+      throw new Error("util::DataType::u8_bit_set::InvalidParameters");
+    }
   }
   return new DataType("u8").is_bit_set(value, position);
 }
 function u16_bit_set(value, position) {
-  if (!value || !position) {
-    throw new Error("util::DataType::u16_bit_set::InvalidParameters");
+  for (const param of arguments) {
+    if (isNaN(param) || typeof param != "number") {
+      throw new Error("util::DataType::u16_bit_set::InvalidParameters");
+    }
   }
   return new DataType("u16").is_bit_set(value, position);
 }
 function u32_bit_set(value, position) {
-  if (!value || !position) {
-    throw new Error("util::DataType::u32_bit_set::InvalidParameters");
+  for (const param of arguments) {
+    if (isNaN(param) || typeof param != "number") {
+      throw new Error("util::DataType::u32_bit_set::InvalidParameters");
+    }
   }
   return new DataType("u32").is_bit_set(value, position);
 }
 
 // src/bit_manipulation_functions/index.ts
 var bit_manipulation_functions_default = {
-  bit_set: {
+  is_bit_set: {
     nibble: nibble_bit_set,
     u8: u8_bit_set,
     u16: u16_bit_set,
