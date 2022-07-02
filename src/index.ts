@@ -6,6 +6,7 @@ import {
 } from './validators';
 
 import * as convert_fns from './convert_functions/index';
+import * as bit_fns from './bit_manipulation_functions/index';
 
 export const validate = {
     nibble: is_valid_nibble,
@@ -15,3 +16,5 @@ export const validate = {
 };
 
 export const convert = { ...convert_fns.default };
+
+export const bits = { ...bit_fns.default };
