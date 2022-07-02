@@ -133,8 +133,8 @@ describe("bits.is_bit_set.u8", ()=> {
         expect(bits.is_bit_set.u8(0x01, 0)).toBe(true);
     });
 
-    it("Should report the last bit set for value 0x10", ()=> {
-        expect(bits.is_bit_set.u8(0x10, 7)).toBe(false);
+    it("Should report the last bit set for value 0x80", ()=> {
+        expect(bits.is_bit_set.u8(0x80, 7)).toBe(true);
     });
 
     it("Should report the middle bit set for value 0x0F", ()=> {
