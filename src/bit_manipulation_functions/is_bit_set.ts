@@ -12,7 +12,7 @@ export class DataType {
 
     // Tell jest not to include this in coverage...
     /* c8 ignore next */
-    valid_handler = (val: number): boolean => false;
+    valid_handler = (val: number): boolean => false; // eslint-disable-line @typescript-eslint/no-unused-vars
 
     constructor(type_name: string) {
         switch (type_name) {
