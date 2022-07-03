@@ -13,7 +13,8 @@
     },
     "devDependencies": {
         "@jest/types": "^28.1.1",
-        "cz-conventional-changelog": "^3.3.0",
+        "cz-conventional-changelog": "^3.0.1",
+        "eslint": "^8.19.0",
         "jest": "^28.1.2",
         "ts-jest": "^28.0.5",
         "tsup": "^6.1.2"
