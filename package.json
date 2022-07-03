@@ -13,6 +13,7 @@
     },
     "devDependencies": {
         "@jest/types": "^28.1.1",
+        "cz-conventional-changelog": "^3.3.0",
         "jest": "^28.1.2",
         "ts-jest": "^28.0.5",
         "tsup": "^6.1.2"
@@ -30,5 +31,10 @@
     "bugs": {
         "url": "https://github.com/notthelewis/js-bin-utils/issues"
     },
-    "homepage": "https://github.com/notthelewis/js-bin-utils#readme"
+    "homepage": "https://github.com/notthelewis/js-bin-utils#readme",
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
 }
