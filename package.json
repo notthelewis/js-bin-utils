@@ -2,7 +2,9 @@
     "scripts": {
         "test": "jest",
         "compile": "npx tsc --emitDeclarationOnly --declaration && npx tsup && cat ./package.json | jq -c | tee ./package.json",
-        "version": "auto-changelog -p && git add CHANGELOG.md"
+        "version": "auto-changelog -p && git add CHANGELOG.md",
+        "lint": "eslint . --ext .ts",
+        "lint-and-fix": "eslint . --ext .ts --fix"
     },
     "name": "binary-utility-functions",
     "description": "This library provides a handy set of utility functions for manipulating binary values- such as those ascertained from a Buffer, or a TCP stream. These functions can be split into two categories:  1) Type validity checking  2) Type conversion",
@@ -13,6 +15,8 @@
     },
     "devDependencies": {
         "@jest/types": "^28.1.1",
+        "@typescript-eslint/eslint-plugin": "^5.30.4",
+        "@typescript-eslint/parser": "^5.30.4",
         "cz-conventional-changelog": "^3.0.1",
         "eslint": "^8.19.0",
         "jest": "^28.1.2",
@@ -23,10 +27,7 @@
         "type": "git",
         "url": "git+https://github.com/notthelewis/js-bin-utils.git"
     },
-    "keywords": [
-        "binary",
-        "bit-twiddling"
-    ],
+    "keywords": ["binary", "bit-twiddling"],
     "author": "Lewis Farnworth",
     "license": "MIT",
     "bugs": {
