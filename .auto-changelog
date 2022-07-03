@@ -1,0 +1,5 @@
+{
+    "breakingPatern": "BREAKING CHANGE: ",
+    "template": "keepachangelog",
+    "commitLimit": false
+}
