@@ -21,7 +21,10 @@
         "type": "git",
         "url": "git+https://github.com/notthelewis/js-bin-utils.git"
     },
-    "keywords": ["binary", "bit-twiddling"],
+    "keywords": [
+        "binary",
+        "bit-twiddling"
+    ],
     "author": "Lewis Farnworth",
     "license": "MIT",
     "bugs": {
