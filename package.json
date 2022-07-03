@@ -17,6 +17,7 @@
         "@jest/types": "^28.1.1",
         "@typescript-eslint/eslint-plugin": "^5.30.4",
         "@typescript-eslint/parser": "^5.30.4",
+        "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.0.1",
         "eslint": "^8.19.0",
         "jest": "^28.1.2",
@@ -27,7 +28,10 @@
         "type": "git",
         "url": "git+https://github.com/notthelewis/js-bin-utils.git"
     },
-    "keywords": ["binary", "bit-twiddling"],
+    "keywords": [
+        "binary",
+        "bit-twiddling"
+    ],
     "author": "Lewis Farnworth",
     "license": "MIT",
     "bugs": {
