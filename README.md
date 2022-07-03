@@ -1,6 +1,6 @@
 # Binary Utility Functions
 
-[![npm version](https://badge.fury.io/js/binary-utility-functions.svg)](https://badge.fury.io/js/binary-utility-functions)
+[![npm version](https://badge.fury.io/js/binary-utility-functions.svg)](https://badge.fury.io/js/binary-utility-functions) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This library provides a handy set of utility functions for manipulating binary
 values- such as those ascertained from a Buffer, or a TCP stream. These functions
