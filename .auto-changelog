@@ -1,0 +1,6 @@
+{
+    "template": "keepachangelog",
+    "commitLimit": false,
+    "breakingPattern": "BREAKING CHANGE: ",
+    "sortCommits": "date"
+}
