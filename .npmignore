@@ -1,11 +1,23 @@
+# Plugin config files, which don't need to be in production
+.auto-changelog
+.eslintrc
+.eslintignore
 .gitignore
-coverage
-jest.config.ts
-node_modules
+.github
+
+# Documentation that doesn't need to be in production
+*.md
+
+# Unneeded nodejs files
 package-lock.json
+node_modules
 src
-tests
+
+# Typescript configuration
 tsup.config.ts
 tsconfig.json
-*.md
-.auto-changelog
+
+# Tests and test config files
+tests
+coverage
+jest.config.ts
