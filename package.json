@@ -1,7 +1,7 @@
 {
     "scripts": {
         "test": "jest",
-        "compile": "npx tsc --emitDeclarationOnly --declaration && npx tsup && cat ./package.json | jq -c | tee ./package.json",
+        "compile": "npx tsc --emitDeclarationOnly --declaration && npx tsup",
         "version": "auto-changelog -p && git add CHANGELOG.md",
         "lint": "eslint . --ext .ts",
         "lint-and-fix": "eslint . --ext .ts --fix"
