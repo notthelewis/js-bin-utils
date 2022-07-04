@@ -1,3 +1,5 @@
+"use strict";
+
 // src/validators.ts
 function is_valid_nibble(value) {
   if (Number.isInteger(value) && value <= 15 && value >= 0) {
